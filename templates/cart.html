@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Your Cart </title>
+        <link rel = "stylesheet" href="{{url_for('static', filename = 'style.css')}}">
+    </head>
+    <body>
+        <h2> Your Cart </h2>
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li style = "color:red;">{{message}}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+    {% endwith %}
+
+    {%  if cart_items %}
+                <ul>
+                    {% for item in cart_items %}
+                        <li>{{ item["name"] }} - ${{ item["price"]}}</li>
+                    {% endfor %}
+                </ul>
+    {% else %}
+                <p> Your cart is empty. </p>
+    {% endif %}
+
+    <p><a href=" {{ url_for('catalog')}}">Continue Shopping</a></p>
+    
+</body>
+</html>

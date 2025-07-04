@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Catalog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Available Products</h1>
+
+    {% if products %}
+        <ul>
+            {% for pid, product in products.items() %}
+                <div class="product">
+                    <strong>{{ product.name }}</strong><br>
+                    Category ID: {{ product.category_id }}<br>
+                    Price: Rs. {{ product.price }}<br>
+                    Product ID: {{ pid }}<br><br>
+
+                    <form method="POST" action="{{ url_for('add_to_cart', product_id=pid) }}">
+                        <input type="submit" value="Add to Cart" class="login-btn">
+                    </form>
+                </div>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+</body>
+</html>
